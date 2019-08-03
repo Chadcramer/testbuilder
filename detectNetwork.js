@@ -40,5 +40,5 @@ var detectNetwork = function(cardNumber) {
   }
 };
 
-detectNetwork('5200000000000000');
+detectNetwork('630400000000');
 

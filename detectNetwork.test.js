@@ -227,6 +227,36 @@ describe('Maestro', function() {
     };
   }
 
+  for (let prefix = 5038; prefix <= 5038; prefix++) {
+    let numStr;
+    for(let length = 12; length <= 19; length++){
+    (function() {
+      let numStr;
+      for(let i = 0; i < length.length; i++){
+        numStr += '1';
+      }
+      it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+        expect(detectNetwork(`${prefix}${numStr}`)).to.equal('Maestro');
+      });
+    })()
+  };
+}
+
+for (let prefix = 6304; prefix <= 6304; prefix++) {
+  let numStr;
+  for(let length = 12; length <= 19; length++){
+    (function() {
+      let numStr;
+      for(let i = 0; i < length.length; i++){
+        numStr += '1';
+      }
+      it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+        expect(detectNetwork(`${prefix}${numStr}`)).to.equal('Maestro');
+      });
+    })()
+    };
+  }
+
 });
 
 
