@@ -103,24 +103,33 @@ describe('Visa', function() {
 });
 
 describe('MasterCard', function() {
+  // MasterCard network always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
+
   // Chai lets you write more human-readable tests that throw helpful errors.
   // Expect syntax is one way to do this, but there are others.
   // If you want to know more, check out the documentation.
   //   http://chaijs.com/api/bdd/
   const expect = chai.expect;
 
-  it('has a prefix of 51 and a length of 16', function() {
-    expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
-  });
+  for (let prefix = 51; prefix <= 55; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 19`, function() {
+          expect(detectNetwork(`${prefix}11111111111111`)).to.equal('MasterCard');
+        });
+    })()
+  };
 
-  it('has a prefix of 52 and a length of 16', function() {
-    expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
-  });
+  // it('has a prefix of 51 and a length of 16', function() {
+  //   expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+  // });
 
-  it('has a prefix of 53 and a lenght of 16', function() {
-    expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
-  });
+  // it('has a prefix of 52 and a length of 16', function() {
+  //   expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+  // });
 
+  // it('has a prefix of 53 and a lenght of 16', function() {
+  //   expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+  // });
 
   // You can also use should instead of expect, which changes the style
   // slightly. It really doesn't matter which one you use - check out
@@ -129,15 +138,15 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten
   // these tests to pass using should syntax, refactor your tests to
   // use either expect or should, but not both.
-  const should = chai.should();
+  // const should = chai.should();
 
-  it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal('MasterCard');
-  });
+  // it('has a prefix of 54 and a length of 16', function() {
+  //   detectNetwork('5412345678901234').should.equal('MasterCard');
+  // });
 
-  it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal('MasterCard');
-  })
+  // it('has a prefix of 55 and a length of 16', function() {
+  //   detectNetwork('5512345678901234').should.equal('MasterCard');
+  // })
 
 });
 
@@ -146,17 +155,78 @@ describe('Discover', function() {
   const expect = chai.expect;
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16', function() {
-    expect(detectNetwork('6011000000000000')).to.equal('Discover');
-  });
 
-  it('has a prefix of 6011 and a length of 19', function() {
-    expect(detectNetwork('6011000000000000000')).to.equal('Discover');
-  });
+  // Discover network always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
+  for (let prefix = 6011; prefix <= 6011; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 16`, function() {
+          expect(detectNetwork(`${prefix}111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
+
+  for (let prefix = 6011; prefix <= 6011; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 19`, function() {
+          expect(detectNetwork(`${prefix}111111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
+
+  for (let prefix = 644; prefix <= 649; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 16`, function() {
+          expect(detectNetwork(`${prefix}1111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
+
+  for (let prefix = 644; prefix <= 649; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 19`, function() {
+          expect(detectNetwork(`${prefix}1111111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
+
+  for (let prefix = 65; prefix <= 65; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 16`, function() {
+          expect(detectNetwork(`${prefix}11111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
+
+  for (let prefix = 65; prefix <= 65; prefix++) {
+    (function() {
+        it(`has a prefix of ${prefix} and a length of 19`, function() {
+          expect(detectNetwork(`${prefix}11111111111111111`)).to.equal('Discover');
+        });
+    })()
+  };
 
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+
+  const expect = chai.expect;
+
+  // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
+    for (let prefix = 5018; prefix <= 5020; prefix += 2) {
+      let numStr;
+      for(let length = 12; length <= 19; length++){
+      (function() {
+        let numStr;
+        for(let i = 0; i < length.length; i++){
+          numStr += '1';
+        }
+        it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+          expect(detectNetwork(`${prefix}${numStr}`)).to.equal('Maestro');
+        });
+      })()
+    };
+  }
+
 });
+
 

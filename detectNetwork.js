@@ -35,6 +35,9 @@ var detectNetwork = function(cardNumber) {
     return `Discover`;
   }
   // Maestro network always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
+  if((cardNumber.slice(0, 4) === '5018' || cardNumber.slice(0, 4) === '5020' || cardNumber.slice(0, 4) === '5038' || cardNumber.slice(0, 4) === '6304') && (cardNumber.length === 12 || cardNumber.length === 13 || cardNumber.length === 14 || cardNumber.length === 15 || cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19)){
+    return `Maestro`;
+  }
 };
 
 detectNetwork('5200000000000000');
