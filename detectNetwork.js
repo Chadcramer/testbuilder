@@ -10,7 +10,23 @@
 // input -> string
 // output -> string
 var detectNetwork = function(cardNumber) {
+  // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+  if(
+    ((Number(cardNumber.slice(0, 6)) >= 622126 && (Number(cardNumber.slice(0, 6))) <= 622925)
+			&& (cardNumber.length >= 16 && cardNumber.length <= 19))
+		||
+		((Number(cardNumber.slice(0, 3)) >= 624 && (Number(cardNumber.slice(0, 3))) <= 626)
+			&& (cardNumber.length >= 16 && cardNumber.length <= 19))
+		||
+		((Number(cardNumber.slice(0, 4)) >= 6282 && (Number(cardNumber.slice(0, 4))) <= 6288)
+			&& (cardNumber.length >= 16 && cardNumber.length <= 19))
 
+		) {return "China UnionPay";}
+
+  // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+  if( (cardNumber.slice(0, 4) === '4903' || cardNumber.slice(0, 4) === '4905' || cardNumber.slice(0, 4) === '4911' || cardNumber.slice(0, 4) === '4936' || cardNumber.slice(0, 6) === '564182' || cardNumber.slice(0, 6) === '633110' || cardNumber.slice(0, 4) === '6333' || cardNumber.slice(0, 4) === '6759') && (cardNumber.length === 16 || cardNumber.length === 18 || cardNumber.length === 19)){
+    return `Switch`;
+  }
   // Diner's Club network always starts with a 38 or 39 and is 14 digits long
   if((cardNumber.slice(0, 2) === '38' || cardNumber.slice(0, 2) === '39') && cardNumber.length === 14 ){
     return `Diner's Club`;
@@ -38,7 +54,41 @@ var detectNetwork = function(cardNumber) {
   if((cardNumber.slice(0, 4) === '5018' || cardNumber.slice(0, 4) === '5020' || cardNumber.slice(0, 4) === '5038' || cardNumber.slice(0, 4) === '6304') && (cardNumber.length === 12 || cardNumber.length === 13 || cardNumber.length === 14 || cardNumber.length === 15 || cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19)){
     return `Maestro`;
   }
+
 };
 
+
+
+detectNetwork('501800000000');
+detectNetwork('50180000000000');
+detectNetwork('501800000000000');
+detectNetwork('5018000000000000');
+detectNetwork('50180000000000000');
+detectNetwork('501800000000000000');
+detectNetwork('5018000000000000000');
+
+detectNetwork('502000000000');
+detectNetwork('50200000000000');
+detectNetwork('502000000000000');
+detectNetwork('5020000000000000');
+detectNetwork('50200000000000000');
+detectNetwork('502000000000000000');
+detectNetwork('5020000000000000000');
+
+detectNetwork('503800000000');
+detectNetwork('50380000000000');
+detectNetwork('503800000000000');
+detectNetwork('5038000000000000');
+detectNetwork('50380000000000000');
+detectNetwork('503800000000000000');
+detectNetwork('5038000000000000000');
+
 detectNetwork('630400000000');
+detectNetwork('63040000000000');
+detectNetwork('630400000000000');
+detectNetwork('6304000000000000');
+detectNetwork('63040000000000000');
+detectNetwork('630400000000000000');
+detectNetwork('6304000000000000000');
+
 
